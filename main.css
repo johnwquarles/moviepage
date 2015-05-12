@@ -1,0 +1,99 @@
+.forms-wrapper, .movie-info {
+  font-family: 'Crete Round', serif;
+}
+
+.header {
+  text-align: center;
+}
+
+h1 {
+  background-color: black;
+  color: white;
+  display: inline-block;
+  font-family: 'Fugaz One', cursive;
+  font-size: 90px;
+  margin: 40px 0 40px;
+  padding-left: 48px;
+  background: url(http://a.fsdn.com/allura/p/popcornjs/icon) no-repeat left center;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 28px;
+}
+
+.textfield {
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.textfield:focus {
+  outline: none;
+}
+
+.error {
+  font-size: 40px;
+  background-color: red;
+  position: relative;
+  top: 30px;
+  display: inline-block;
+}
+
+.movie-info img {
+  width: 162px;
+  height: 240px;
+  padding-right: 20px;
+}
+
+.row {
+  margin: 0;
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+forms-wrapper {
+  height: 100%;
+}
+
+form p {
+  font-size: 26px;
+}
+
+table img {
+  width: 121px;
+  height: 180px;
+}
+
+table th {
+  font-size: 24px;
+  font-weight: 800;
+  font-family: 'Crete Round', serif;
+}
+
+body {
+  background-image: url('http://www.auditoriumfurnitureturkey.com/file/2015/02/Keating.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.movie-info, .movie-table-container, .forms-wrapper {
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+div.movie-table-container.table-responsive {
+  border-radius: 10px;
+}
+
+table tbody tr td:not(:first-of-type) {
+  vertical-align: middle;
+  font-size: 22px;
+  font-family: 'Hind', sans-serif;
+}
+
+table tbody tr td:nth-of-type(2) {
+  font-size: 36px;
+  font-weight: 800;
+}
