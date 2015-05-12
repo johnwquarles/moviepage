@@ -41,8 +41,12 @@ h1 {
   font-size: 40px;
   background-color: red;
   position: relative;
-  top: 30px;
-  display: inline-block;
+  top: 40px;
+  display: block;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .movie-info img {

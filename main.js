@@ -26,7 +26,7 @@ $SUBMITBUTTON.click(function(event) {
 })
 
 function setPosterUrl(obj) {
-  var poster_path = obj.results[0].poster_path;
+  var poster_path = obj.results && obj.results[0] && obj.results[0].poster_path;
   poster_url = TMDB_POSTER_BASE + poster_path + TMDB_API_KEY;
   // have the poster url; now get the rest of the data and then write poster url into it.
   var request_url = API_URL + getSearchParams();
@@ -68,13 +68,18 @@ function addMovieInfo(obj) {
   $MOVIEINFO.empty();
   if (!(obj.Year)) {
     $MOVIEINFO.append(makeError());
+    setTimeout(function() {
+      $(".error").fadeOut(500, function() {
+        $(".error").remove();
+      })
+    }, 3000)
     return false;
   }
   $MOVIEINFO.append(makeMovieInfo(obj));
 }
 
 function makeError() {
-  var $error = $('<p>(´Ａ｀。) No results!</p>')
+  var $error = $('<div><p>(´Ａ｀。) No results!</p></div>')
   $error.addClass("error");
   return $error;
 }
