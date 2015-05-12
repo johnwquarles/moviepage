@@ -58,7 +58,7 @@ function makeMovieInfo(obj) {
   var $rating = $("<p>" + obj.Rated + "</p>");
   var $runtime = $("<p>" + obj.Runtime + "</p>");
   var $add_button = $("<button>Add to my list</button>");
-  $add_button.addClass("add-button btn btn-default btn-success");
+  $add_button.addClass("add-button btn btn-lg btn-success pull-right");
   if (obj.Poster !== "N/A") {
     var $poster = $("<img src='" + obj.Poster + "'></img>");
     $poster.addClass("pull-left");
@@ -89,9 +89,9 @@ function makeTableRow(obj, id) {
   var $row = $("<tr></tr>");
   var $poster_td;
   $row.attr("data_id", id || obj.data_id);
-  obj.Poster === "N/A" ? $poster_td = $("<td>Not found!</td>") : $poster_td = $("<td><img src='" + obj.Poster + "'></src>");
+  obj.Poster === "N/A" ? $poster_td = $("<td><img src='" + "https://www.utopolis.lu/bundles/utopoliscommon/images/movies/movie-placeholder.jpg" + "'></td>") : $poster_td = $("<td><img src='" + obj.Poster + "'></src>");
   $other_rows = $("<td>" + obj.Title + "</td><td>" + obj.Year + "</td><td>" + obj.Rated + "</td><td><button>Watched</button></td>");
-  $other_rows.find("button").addClass("btn btn-default btn-danger");
+  $other_rows.find("button").addClass("btn btn-lg btn-danger");
   $row.append($poster_td).append($other_rows);
   return $row;
 }
@@ -106,14 +106,6 @@ function writeToFirebase(obj) {
 function deleteFromFirebase(id) {
   var deleteUrl = FIREBASE_URL.slice(0, -5) + '/' + id + '.json';
   $.ajax({url: deleteUrl, type: 'DELETE'});
-}
-
-function initialLoad2() {
-  $.get(FIREBASE_URL, function(db_data) {
-    db_data && Object.keys(db_data).forEach(function(key) {
-      addToTable(db_data[key], key);
-    })
-  })
 }
 
 function initialLoad() {
