@@ -65,11 +65,16 @@ forms-wrapper {
 
 form p {
   font-size: 28px;
+  font-family: 'Hind', sans-serif;
 }
 
 table img {
   width: 121px;
   height: 180px;
+}
+
+table img:hover {
+  cursor: pointer;
 }
 
 table th {

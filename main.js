@@ -31,6 +31,13 @@ $MOVIETABLECONTAINER.on('click', 'button', function(event) {
   });
 })
 
+$MOVIETABLECONTAINER.on('click', 'img', function(event) {
+  event.preventDefault();
+  var id = $(this).closest('tr').attr('data_id');
+  $.get(FIREBASE_URL.slice(0, -5) + '/' + id + '.json', addMovieInfo, "jsonp");
+})
+
+
 function addMovieInfo(obj) {
   movie_info_obj = obj;
   $MOVIEINFO.empty();
