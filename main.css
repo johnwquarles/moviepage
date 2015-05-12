@@ -121,3 +121,7 @@ table tbody tr td:nth-of-type(2) {
   height: 57px;
   width: 257px;
 }
+
+.movie-info:empty {
+  display: none;
+}
