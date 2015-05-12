@@ -89,9 +89,13 @@ body {
   background-attachment: fixed;
 }
 
-.movie-info, .movie-table-container, .forms-wrapper {
+.movie-info, .forms-wrapper {
   background-color: white;
   margin-bottom: 20px;
+}
+
+.movie-table-container {
+  background-color: white;
 }
 
 div.movie-table-container.table-responsive {
@@ -107,4 +111,13 @@ table tbody tr td:not(:first-of-type) {
 table tbody tr td:nth-of-type(2) {
   font-size: 36px;
   font-weight: 800;
+}
+
+.footer {
+  text-align: center;
+}
+
+.footer img {
+  height: 57px;
+  width: 257px;
 }

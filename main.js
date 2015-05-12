@@ -5,15 +5,33 @@ var $TEXTFIELD = $(".textfield");
 var $MOVIEINFO = $(".movie-info");
 var $MOVIETABLECONTAINER = $(".movie-table-container");
 var movie_info_obj;
+var poster_url;
+var TMDB_API_KEY = "?api_key=3d3efaa01fcce58b6e8758f0f9d9c93d";
+var TMDB_SEARCH_URL = "http://api.themoviedb.org/3/search/movie";
+var TMDB_POSTER_BASE = "http://image.tmdb.org/t/p/w500";
+
 
 initialLoad();
 
+function getSearchParams() {
+  var movie_title = $TEXTFIELD.val();
+  var search_params = movie_title.split(" ").join("+");
+  return search_params;
+}
+
 $SUBMITBUTTON.click(function(event) {
   event.preventDefault();
-  var movie_title = $TEXTFIELD.val();
-  var request_url = API_URL + movie_title.split(" ").join("+");
-  $.get(request_url, addMovieInfo, 'jsonp');
+  var tmdb_search_url = TMDB_SEARCH_URL + TMDB_API_KEY + "&query=" + getSearchParams();
+  $.get(tmdb_search_url, setPosterUrl, 'jsonp');
 })
+
+function setPosterUrl(obj) {
+  var poster_path = obj.results[0].poster_path;
+  poster_url = TMDB_POSTER_BASE + poster_path + TMDB_API_KEY;
+  // have the poster url; now get the rest of the data and then write poster url into it.
+  var request_url = API_URL + getSearchParams();
+  $.get(request_url, addMovieInfo, 'jsonp');
+}
 
 $MOVIEINFO.on('click', '.add-button', function(event) {
   event.preventDefault();
@@ -34,12 +52,19 @@ $MOVIETABLECONTAINER.on('click', 'button', function(event) {
 $MOVIETABLECONTAINER.on('click', 'img', function(event) {
   event.preventDefault();
   var id = $(this).closest('tr').attr('data_id');
-  $.get(FIREBASE_URL.slice(0, -5) + '/' + id + '.json', addMovieInfo, "jsonp");
+  $.get(FIREBASE_URL.slice(0, -5) + '/' + id + '.json', reClick, "jsonp");
 })
 
+// reClick is for reloading stored movies into the movie info view; don't need to rewrite the poster url.
+function reClick(obj) {
+  movie_info_obj = obj;
+  $MOVIEINFO.empty();
+  $MOVIEINFO.append(makeMovieInfo(obj));
+}
 
 function addMovieInfo(obj) {
   movie_info_obj = obj;
+  movie_info_obj.Poster = poster_url;
   $MOVIEINFO.empty();
   if (!(obj.Year)) {
     $MOVIEINFO.append(makeError());
@@ -66,11 +91,15 @@ function makeMovieInfo(obj) {
   var $runtime = $("<p>" + obj.Runtime + "</p>");
   var $add_button = $("<button>Add to my list</button>");
   $add_button.addClass("add-button btn btn-lg btn-success pull-right");
-  if (obj.Poster !== "N/A") {
-    var $poster = $("<img src='" + obj.Poster + "'></img>");
-    $poster.addClass("pull-left");
-    $info_container.append($poster)
-  }
+  //if (obj.Poster !== "N/A") {
+  //  var $poster = $("<img src='" + obj.Poster + "'></img>");
+  //  $poster.addClass("pull-left");
+  //  $info_container.append($poster)
+  //}
+  
+  var $poster = $("<img src='" + obj.Poster + "'></img>");
+  $poster.addClass("pull-left");
+  $info_container.append($poster);
   $info_container.append($title).append($year).append($director).append($plot).append($runtime).append($add_button);
   return $info_container;
 }
