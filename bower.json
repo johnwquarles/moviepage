@@ -1,0 +1,22 @@
+{
+  "name": "Movie Agenda",
+  "version": "1.0.0",
+  "homepage": "https://github.com/johnwquarles/moviepage",
+  "authors": [
+    "johnwquarles <john.w.quarles@gmail.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "~3.8.0",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.4"
+  }
+}
